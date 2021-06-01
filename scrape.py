@@ -25,6 +25,7 @@ async def main():
         
     page_content = await page.content() 
     soup = BeautifulSoup(page_content, 'html.parser')
+    
     i=0
     for trs in soup.select('tr'):
         if i==0:
@@ -44,8 +45,7 @@ async def main():
         market_cap.append('$'+long[2])   
 
         volume.append(p[4].text)      
-        circulating_supply.append(p[6].text)
-    print(name)  
+        circulating_supply.append(p[6].text) 
 
     dict = {'name':name,
             'price': price,
