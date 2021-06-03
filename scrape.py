@@ -4,8 +4,10 @@ import asyncio
 
 from pyppeteer import launch
 import pandas as pd
+from datetime import datetime
 
 name = []
+nickname = []
 price = []
 daily_percent = []
 weekly_percent = []
@@ -13,9 +15,10 @@ market_cap = []
 volume = []
 circulating_supply = []
 
+
 async def main():
 
-    browser = await launch(headless=True)
+    browser = await launch()
     page = await browser.newPage()
     page_path = "https://coinmarketcap.com"
     await page.goto(page_path)
@@ -25,7 +28,7 @@ async def main():
         
     page_content = await page.content() 
     soup = BeautifulSoup(page_content, 'html.parser')
-    
+
     i=0
     for trs in soup.select('tr'):
         if i==0:
@@ -37,6 +40,7 @@ async def main():
         span = trs.select('span')
 
         name.append(p[1].text)
+        nickname.append(p[2].text)
         price.append(a[1].text)  
         daily_percent.append(span[2].text)   
         weekly_percent.append(span[4].text)  
@@ -47,17 +51,24 @@ async def main():
         volume.append(p[4].text)      
         circulating_supply.append(p[6].text) 
 
-    dict = {'name':name,
+    time = datetime.now()
+    date = str(time).split(' ')[0]
+    t = str(time).split(' ')[1]
+
+    dict = {
+            'name': name,
+            'nickname': nickname,
             'price': price,
             'daily_percent': daily_percent,
             'weekly_percent': weekly_percent,
-            'market_cap':market_cap,
-            'volume':volume,
-            'circulating_supply':circulating_supply
+            'market_cap': market_cap,
+            'volume': volume,
+            'circulating_supply': circulating_supply,
+            'time': time
     }
 
     df = pd.DataFrame(dict)
-    df.to_csv('crypto.csv')
+    df.to_csv('name_crypto_'+date+'_'+t+'.csv')  
 
     await browser.close() 
     
