@@ -54,4 +54,5 @@ The **csv_to_db.py** will be inserting values into a database, if it exists.
 ### License
 
 Copyright (c) 2021 Avery Grace Bostick
+
 Licensed under the MIT license.
