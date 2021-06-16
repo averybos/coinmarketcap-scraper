@@ -49,3 +49,9 @@ From there, I used *[Pandas](https://pandas.pydata.org/)* to convert all data in
 Running the **scrape.py** file will get the csv file outputted into the same directory you are running the code in.
 
 The **csv_to_db.py** will be inserting values into a database, if it exists. 
+
+
+### License
+
+Copyright (c) 2021 Avery Grace Bostick
+Licensed under the MIT license.
