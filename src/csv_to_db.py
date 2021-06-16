@@ -1,10 +1,10 @@
 import sqlite3
 import csv
-
+from urllib.request import pathname2url
 
 try:
 
-    with open('name_crypto_2021-06-02_11:24:44.991497.csv') as dat:
+    with open('../name_crypto_2021-06-02_11:24:44.991497.csv') as dat:
         dr = csv.DictReader(dat)
         name_data = [(i['name'], 
             i['nickname']) for i in dr] 
@@ -16,7 +16,12 @@ try:
             i['volume'], 
             i['circulating_supply']) for i in dr]
 
-    con = sqlite3.connect('scraper.db')
+    try:
+        db = 'file:{}?mode=rw'.format(pathname2url('scraper.db'))
+        con = sqlite3.connect(db, uri=True)
+    except sqlite3.OperationalError:
+        print('database does not exist')
+    # handle missing database case
     cur = con.cursor()
 
     #cur.execute('''CREATE TABLE crypto_data

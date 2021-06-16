@@ -15,7 +15,6 @@ market_cap = []
 volume = []
 circulating_supply = []
 
-
 async def main():
 
     browser = await launch()
