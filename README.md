@@ -51,7 +51,7 @@ Running the **scrape.py** file will get the csv file outputted into the same dir
 The **csv_to_db.py** will be inserting values into a database, if it exists. 
 
 
-### License
+## License
 
 Copyright (c) 2021 Avery Grace Bostick
 
