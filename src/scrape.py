@@ -5,6 +5,9 @@ import asyncio
 from pyppeteer import launch
 import pandas as pd
 from datetime import datetime
+from datetime import timedelta
+
+'''Author: Avery Bostick'''
 
 name = []
 nickname = []
@@ -16,13 +19,21 @@ volume = []
 circulating_supply = []
 
 async def main():
+    '''
+    This is an asynchronous function that calls a website (coinmarketcap.com) 
+    in order to collect certain items of data from it.
+
+    '''
 
     browser = await launch()
     page = await browser.newPage()
     page_path = "https://coinmarketcap.com"
     await page.goto(page_path)
 
+    # this 200 number is close enough to the amount of time
+    # it takes to scroll all the way down
     for i in range(200):
+        # pyppeteer scrolling down on the headless browser
         await page.keyboard.press('ArrowDown')
         
     page_content = await page.content() 
@@ -38,6 +49,9 @@ async def main():
         a = trs.select('a')
         span = trs.select('span')
 
+        # looking through the developer console on chrome, 
+        # this is where each piece of data is to be found
+        # and collected to be put in a list
         name.append(p[1].text)
         nickname.append(p[2].text)
         price.append(a[1].text)  
@@ -50,10 +64,13 @@ async def main():
         volume.append(p[4].text)      
         circulating_supply.append(p[6].text) 
 
+    # finding exact time of data collection
+    # in order to differentiate each csv file name
     time = datetime.now()
+    x = timedelta(hours=time.hour, minutes=time.minute, seconds=time.second)
     date = str(time).split(' ')[0]
-    t = str(time).split(' ')[1]
 
+    # final dictionary to store all data
     dict = {
             'name': name,
             'nickname': nickname,
@@ -66,10 +83,12 @@ async def main():
             'time': time
     }
 
+    # simply converted to dataframe and then csv file from there
     df = pd.DataFrame(dict)
-    df.to_csv('name_crypto_'+date+'_'+t+'.csv')  
+    df.to_csv('name_crypto_'+date+'_'+str(x)+'.csv')  
 
     await browser.close() 
     
+if __name__ == "__main__":
+    asyncio.get_event_loop().run_until_complete(main())
 
-asyncio.get_event_loop().run_until_complete(main())
