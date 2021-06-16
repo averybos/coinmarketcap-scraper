@@ -8,20 +8,20 @@ I used the Python scraping library *[BeautifulSoup](https://beautiful-soup-4.rea
 
 - Why do I need pyppeteer to scroll the website for me though?
 
-At first glance, <coinmarketcap.com> is a regular site. All you need is to find the appropriate class name within the HTML and pull the data, right? Wrong. Coinmarketcap is a *dynamically loading* site, or lazy loading site. All the information appears to be on the webpage, but in the background, it actually is not all there. It loads when you scroll down, but BeautifulSoup, or even getting the html contents with a simple 
+At first glance, <https://coinmarketcap.com> is a regular site. All you need is to find the appropriate class name within the HTML and pull the data, right? Wrong. Coinmarketcap is a *dynamically loading* site, or lazy loading site. All the information appears to be on the webpage, but in the background, it actually is not all there. It loads when you scroll down, but BeautifulSoup, or even getting the html contents with a simple 
 
-    wget coinmarketcap.com
+```wget coinmarketcap.com```
 
 won't show all the data you want. I was only getting the full data from the top 10 crypto's - versus the top 100 on the front page that I wanted.
 
 Pyppeteer solved the problem for me. It is the 'virtual' keyboard that scrolls the site to load all the data, from there BeautifulSoup comes in and does their work, parsing and finding the data. To see Pyppeteer in action, setting  
 
 
-    browser = await launch()
+```browser = await launch()```
 
 in the *scrape.py* file to
 
-    browser = await launch(headless = False)
+```browser = await launch(headless = False)```
 
 will show you the scrolling.
 
