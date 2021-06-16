@@ -1,16 +1,28 @@
-# Crypto Data Collector from Coinmarketcap.com
+# Crypto Data Collector
 
-This is a an application that pulls all the relevant data from *[coinmarketcap.com](coinmarketcap.com), a cryptocurrency website that displays **up-to-date** information about all things crypto. With this application, you will be able to talk with others about more currencies than just Bitcoin and Dogecoin, congrats!
+`coinmarketcap-scraper` is an application that easily lets you pull all the relevant data from *[Coinmarketcap](coinmarketcap.com)*, a cryptocurrency website that displays **up-to-date** information about all things crypto. With this tool, you will be able to talk with others about currencies more than just Bitcoin and Dogecoin, congrats!
 
+## How does this work?
 
+I used the Python scraping library *[BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/)* to pull the data from Coinmarketcap. I used another library called *[Pyppeteer](https://pyppeteer.github.io/pyppeteer/)* that acts as a headless chrome browser in order to scroll the site for me. 
 
+- Why do I need pyppeteer to scroll the website for me though?
 
-I used the python scraping library BeautifulSoup, and at first was getting a weird error where I would collect the data from the top 10 cryptos, and the rest of the 100 would have missing data. Upon further inspection, it was not BeautifulSoup's parsing giving me the error, but the webpage itself.
+At first glance, <coinmarketcap.com> is a regular site. All you need is to find the appropriate class name within the HTML and pull the data, right? Wrong. Coinmarketcap is a *dynamically loading* site, or lazy loading site. All the information appears to be on the webpage, but in the background, it actually is not all there. It loads when you scroll down, but BeautifulSoup, or even getting the html contents with a simple 
+    `wget coinmarketcap.com`
+won't show all the data you want. I was only getting the full data from the top 10 crypto's - versus the top 100 on the front page that I wanted.
 
-the key to figuring out how to take the data from this website was not the scraping itself, but figuring out how to collect data from a lazy loading site.
+Pyppeteer solved the problem for me. It is the 'virtual' keyboard that scrolls the site to load all the data, from there BeautifulSoup comes in and does their work, parsing and finding the data. To see Pyppeteer in action, setting
+    ```browser = await launch()```
+to
+    ```browser = await launch(headless = False)```
+will show you the scrolling.
+![Alt text](headless-scrolling.gif)
 
-I found another library called Pyppeteer, a python port of puppeteer, a javascript headless chromium automation library.
-
-essentially I used a "virtual" keyboard that would scroll to the bottom of the page to make sure all data rows were loaded, before creating the page content variable and then having BeautifulSoup parse that.
 
 from there, I used Pandas to convert all data into one DataFrame, and then export to a csv file.
+
+
+## How can I use it?
+
+
