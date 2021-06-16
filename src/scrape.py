@@ -85,7 +85,7 @@ async def main():
 
     # simply converted to dataframe and then csv file from there
     df = pd.DataFrame(dict)
-    df.to_csv('name_crypto_'+date+'_'+str(x)+'.csv')  
+    df.to_csv('top_100_'+date+'_'+str(x)+'.csv')  
 
     await browser.close() 
     
