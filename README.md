@@ -1,6 +1,17 @@
 # Crypto Data Collector
 
-`coinmarketcap-scraper` is an application that easily lets you pull all the relevant data from *[Coinmarketcap](coinmarketcap.com)*, a cryptocurrency website that displays **up-to-date** information about all things crypto. With this tool, you will be able to talk with others about currencies more than just Bitcoin and Dogecoin, congrats!
+`coinmarketcap-scraper` is an application that easily lets you pull all the relevant data from *[Coinmarketcap](coinmarketcap.com)*, a cryptocurrency website that displays **up-to-date** information about all things crypto. 
+- Which pieces of data does this pull:
+    - Crypto name
+    - Nickname
+    - Price
+    - Daily Percent
+    - Weekly Percent
+    - Market Cap
+    - Volume
+    - Circulating Supply
+     
+With this tool, you will be able to talk with others about currencies more than just Bitcoin and Dogecoin, congrats!
 
 ## How does this work?
 
@@ -29,7 +40,8 @@ will show you the scrolling.
 ![Alt text](headless-scrolling.gif)
 
 
-from there, I used Pandas to convert all data into one DataFrame, and then export to a csv file.
+
+From there, I used *[Pandas](https://pandas.pydata.org/)* to convert all data into one DataFrame, and then export to a nice and neat csv file.
 
 
 ## How can I use it?

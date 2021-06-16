@@ -18,7 +18,7 @@ circulating_supply = []
 
 async def main():
 
-    browser = await launch(headless = False)
+    browser = await launch()
     page = await browser.newPage()
     page_path = "https://coinmarketcap.com"
     await page.goto(page_path)
