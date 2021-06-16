@@ -1,8 +1,9 @@
-<h2>Crypto Data Collector from Coinmarketcap.com</h2>
+# Crypto Data Collector from Coinmarketcap.com
 
-this is a repo by avery bostick that collects data from coinmarketcap.com, a cryptocurrency website.
+This is a an application that pulls all the relevant data from *[coinmarketcap.com](coinmarketcap.com), a cryptocurrency website that displays **up-to-date** information about all things crypto. With this application, you will be able to talk with others about more currencies than just Bitcoin and Dogecoin, congrats!
 
-using python
+
+
 
 I used the python scraping library BeautifulSoup, and at first was getting a weird error where I would collect the data from the top 10 cryptos, and the rest of the 100 would have missing data. Upon further inspection, it was not BeautifulSoup's parsing giving me the error, but the webpage itself.
 
