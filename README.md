@@ -1,6 +1,6 @@
 # Crypto Data Collector
 
-`coinmarketcap-scraper` is an application that easily lets you pull all the relevant data from *[Coinmarketcap](coinmarketcap.com)*, a cryptocurrency website that displays **up-to-date** information about all things crypto. 
+`coinmarketcap-scraper` is an application that easily lets you pull all the relevant data from *[Coinmarketcap](https://coinmarketcap.com/)*, a cryptocurrency website that displays **up-to-date** information about all things crypto. 
 - Which pieces of data does this pull:
     - Crypto name
     - Nickname
